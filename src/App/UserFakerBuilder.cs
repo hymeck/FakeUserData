@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Globalization;
 using App.Domain;
 using Bogus;
 
@@ -35,10 +35,20 @@ namespace App
             Faker<Address> addressFaker,
             Faker<PhoneNumber> numberFaker)
         {
+            // return new Faker<User>(locale)
+            //     .RuleFor(x => x.Name, nameFaker)
+            //     .RuleFor(x => x.Address, addressFaker)
+            //     .RuleFor(x => x.PhoneNumber, numberFaker);
+            var ri = new RegionInfo(locale);
+            string[] names = {ri.NativeName, ri.ThreeLetterISORegionName};
             return new Faker<User>(locale)
-                .RuleFor(x => x.Name, nameFaker)
-                .RuleFor(x => x.Address, addressFaker)
-                .RuleFor(x => x.PhoneNumber, numberFaker);
+                .RuleFor(x => x.FullName, f => f.Name.FullName())
+                .RuleFor(x => x.Country, f => f.PickRandom(names))
+                .RuleFor(x => x.Region, f => f.Address.State())
+                .RuleFor(x => x.City, f => f.Address.City())
+                .RuleFor(x => x.StreetAddress, f => f.Address.StreetAddress())
+                .RuleFor(x => x.ZipCode, f => f.Address.ZipCode())
+                .RuleFor(x => x.Number, f => f.Phone.PhoneNumber());
         }
 
         public static Faker<User> Create(string locale)

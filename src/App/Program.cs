@@ -8,7 +8,8 @@ namespace App
         static void Main(string[] args)
         {
             if (args.Length != 2 ||
-                !int.TryParse(args[0], out var count) || count < 1 ||
+                !int.TryParse(args[0], out var count) || 
+                count < 1 ||
                 !Utils.IsLocaleSupported(args[1]))
                 PrintUsage();
 
