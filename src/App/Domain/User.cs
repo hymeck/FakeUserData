@@ -8,7 +8,7 @@ namespace App.Domain
         public Address Address { get; set; }
         public PhoneNumber PhoneNumber { get; set; }
 
-        public override string ToString() =>
-            string.Join(' ', Name?.ToString(), Address?.ToString(), PhoneNumber?.ToString());
+        // public override string ToString() =>
+        //     string.Join(' ', Name?.ToString(), Address?.ToString(), PhoneNumber?.ToString());
     }
 }

@@ -16,7 +16,7 @@ namespace App
                 PerformGeneration(args[1], count);
         }
 
-        public static void PerformGeneration(string locale, int count)
+        private static void PerformGeneration(string locale, int count)
         {
             var correctedLocale = Utils.GetCorrectedLocale(locale);
             var faker = UserFakerBuilder.Create(correctedLocale);
